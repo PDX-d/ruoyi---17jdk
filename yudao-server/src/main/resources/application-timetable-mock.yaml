@@ -1,0 +1,41 @@
+timetable:
+  mock:
+    enabled: false
+    tenant-id: 1
+    current-semester-id: 1
+    semesters:
+      1:
+        id: 1
+        name: 开发测试学期
+        start-date: 2026-09-01
+        end-date: 2027-01-31
+        archived: false
+      2:
+        id: 2
+        name: 开发测试归档学期
+        start-date: 2026-02-01
+        end-date: 2026-07-31
+        archived: true
+    courses:
+      1:
+        id: 1
+        name: Java 程序设计
+        teacher-ids: [1, 2]
+        class-ids: [1, 2]
+      2:
+        id: 2
+        name: 数据库原理
+        teacher-ids: [2]
+        class-ids: [1, 2]
+    teachers:
+      1: 测试教师甲
+      2: 测试教师乙
+    classes:
+      1: 测试一班
+      2: 测试二班
+    accounts: {}
+    students:
+      1:
+        - id: 101
+      2:
+        - id: 102
