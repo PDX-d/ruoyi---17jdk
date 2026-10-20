@@ -34,4 +34,14 @@ public interface DeptMapper extends BaseMapperX<DeptDO> {
         return selectList(DeptDO::getLeaderUserId, id);
     }
 
+    /**
+     * 按部门名称批量查询（供外部模块「名称 → 编号」反查使用）
+     *
+     * @param names 部门名称集合
+     * @return 部门列表
+     */
+    default List<DeptDO> selectListByName(Collection<String> names) {
+        return selectList(DeptDO::getName, names);
+    }
+
 }

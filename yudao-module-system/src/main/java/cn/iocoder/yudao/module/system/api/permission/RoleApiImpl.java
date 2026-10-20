@@ -33,6 +33,16 @@ public class RoleApiImpl implements RoleApi {
     }
 
     @Override
+    public Long getRoleIdByCode(String code) {
+        // 角色数量有限，直接遍历；如需高频调用可后续在 RoleService 增加按编码查询
+        return roleService.getRoleList().stream()
+                .filter(role -> role.getCode() != null && role.getCode().equals(code))
+                .map(RoleDO::getId)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public List<RoleRespDTO> getRoleList(Collection<Long> ids) {
         List<RoleDO> list = roleService.getRoleList(ids);
         return BeanUtils.toBean(list, RoleRespDTO.class);

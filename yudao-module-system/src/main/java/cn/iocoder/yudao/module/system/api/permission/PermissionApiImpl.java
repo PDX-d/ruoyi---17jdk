@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -32,6 +33,12 @@ public class PermissionApiImpl implements PermissionApi {
     @Override
     public boolean hasAnyRoles(Long userId, String... roles) {
         return permissionService.hasAnyRoles(userId, roles);
+    }
+
+    @Override
+    public void assignUserRole(Long userId, Collection<Long> roleIds) {
+        // 覆盖式分配角色：委托 system 模块内部的 PermissionService，edu 模块不直接触碰 Permission/Role 的 DAL
+        permissionService.assignUserRole(userId, new HashSet<>(roleIds));
     }
 
     @Override

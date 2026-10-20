@@ -68,6 +68,14 @@ public interface DeptService {
     List<DeptDO> getDeptList(DeptListReqVO reqVO);
 
     /**
+     * 按部门名称批量查询（供外部模块「名称 → 编号」反查使用）
+     *
+     * @param names 部门名称集合
+     * @return 部门列表
+     */
+    List<DeptDO> getDeptListByName(Collection<String> names);
+
+    /**
      * 获得指定编号的部门 Map
      *
      * @param ids 部门编号数组

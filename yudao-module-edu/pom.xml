@@ -24,6 +24,13 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- 工作流：学籍变更审批通过 BPM 的 Api 调用 -->
+        <dependency>
+            <groupId>cn.iocoder.boot</groupId>
+            <artifactId>yudao-module-bpm</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- Web 相关 -->
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
@@ -33,6 +40,12 @@
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
             <artifactId>yudao-spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- 数据权限：行级数据范围（学生 = 本部门及以下 / 仅本人） -->
+        <dependency>
+            <groupId>cn.iocoder.boot</groupId>
+            <artifactId>yudao-spring-boot-starter-biz-data-permission</artifactId>
         </dependency>
 
         <!-- DB 相关 -->

@@ -32,6 +32,18 @@ public interface RoleApi {
     RoleRespDTO getRole(Long id);
 
     /**
+     * 按角色编码获得角色编号
+     *
+     * 【说明，给后续开发同学】
+     * 本方法是模块三「学生自动建号后分配基础角色」所需的最小跨模块能力：
+     * edu 模块只知道角色编码（如 edu_student），需要拿到角色编号才能分配。
+     *
+     * @param code 角色编码
+     * @return 角色编号；不存在时返回 null
+     */
+    Long getRoleIdByCode(String code);
+
+    /**
      * 获得角色信息数组
      *
      * @param ids 角色编号数组
