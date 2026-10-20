@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 部门 API 实现类
@@ -31,6 +33,24 @@ public class DeptApiImpl implements DeptApi {
     public List<DeptRespDTO> getDeptList(Collection<Long> ids) {
         List<DeptDO> depts = deptService.getDeptList(ids);
         return BeanUtils.toBean(depts, DeptRespDTO.class);
+    }
+
+    @Override
+    public List<DeptRespDTO> getDeptListByName(Collection<String> names) {
+        List<DeptDO> depts = deptService.getDeptListByName(names);
+        return BeanUtils.toBean(depts, DeptRespDTO.class);
+    }
+
+    @Override
+    public List<DeptRespDTO> getRootDeptList() {
+        // 注意：getChildDeptList 返回的是「根部门下的全部子孙部门」，因此这里再按 parentId 过滤出「直属根部门的部门」，
+        // 即真正的顶级部门（学院）。
+        List<DeptDO> allDepts = deptService.getChildDeptList(
+                Collections.singleton(DeptDO.PARENT_ID_ROOT));
+        List<DeptDO> rootDepts = allDepts.stream()
+                .filter(dept -> DeptDO.PARENT_ID_ROOT.equals(dept.getParentId()))
+                .collect(Collectors.toList());
+        return BeanUtils.toBean(rootDepts, DeptRespDTO.class);
     }
 
     @Override

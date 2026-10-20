@@ -185,6 +185,14 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
+    public List<DeptDO> getDeptListByName(Collection<String> names) {
+        if (CollUtil.isEmpty(names)) {
+            return Collections.emptyList();
+        }
+        return deptMapper.selectListByName(names);
+    }
+
+    @Override
     public List<DeptDO> getChildDeptList(Collection<Long> ids) {
         List<DeptDO> children = new LinkedList<>();
         // 遍历每一层

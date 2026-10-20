@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.system.api.user;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
+import cn.iocoder.yudao.module.system.api.user.dto.AdminUserCreateReqDTO;
 import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 
 import java.util.Collection;
@@ -15,6 +16,19 @@ import java.util.Map;
  * @author 芋道源码
  */
 public interface AdminUserApi {
+
+    /**
+     * 创建用户
+     *
+     * 【说明，给后续开发同学】
+     * 本方法是为「模块三 学生管理 - 创建学生时自动建号」新增的最小跨模块能力，
+     * 避免 edu 模块直接依赖 system 模块的 Service / Controller VO。
+     * 惯例：跨模块只允许通过 Api 接口调用，不得直接 import 其它模块的 Mapper / DO / Service。
+     *
+     * @param createReqDTO 用户创建信息
+     * @return 用户编号
+     */
+    Long createUser(AdminUserCreateReqDTO createReqDTO);
 
     /**
      * 通过用户 ID 查询用户

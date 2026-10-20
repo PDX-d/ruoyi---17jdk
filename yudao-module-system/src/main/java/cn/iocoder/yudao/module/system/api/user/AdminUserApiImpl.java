@@ -5,7 +5,9 @@ import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.framework.datapermission.core.annotation.DataPermission;
 import cn.iocoder.yudao.framework.datapermission.core.util.DataPermissionUtils;
+import cn.iocoder.yudao.module.system.api.user.dto.AdminUserCreateReqDTO;
 import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
+import cn.iocoder.yudao.module.system.controller.admin.user.vo.user.UserSaveReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.yudao.module.system.service.dept.DeptService;
@@ -32,6 +34,24 @@ public class AdminUserApiImpl implements AdminUserApi {
     private AdminUserService userService;
     @Resource
     private DeptService deptService;
+
+    @Override
+    public Long createUser(AdminUserCreateReqDTO createReqDTO) {
+        // 【说明】将跨模块 DTO 转换为 system 模块内部 UserSaveReqVO 后，复用 AdminUserService.createUser，
+        // 从而复用其「账号唯一校验 / 密码加密 / 账号数量限制 / 操作日志」等既有逻辑。
+        // 注意：UserSaveReqVO 对 username 有 4-30 位数字/字母、password 有 4-16 位的校验，
+        // 若后续学生学号长度超出范围（例如超过 16 位），需要在此处或上游做适配。
+        UserSaveReqVO reqVO = new UserSaveReqVO();
+        reqVO.setUsername(createReqDTO.getUsername());
+        reqVO.setNickname(createReqDTO.getNickname());
+        reqVO.setPassword(createReqDTO.getPassword());
+        reqVO.setDeptId(createReqDTO.getDeptId());
+        reqVO.setMobile(createReqDTO.getMobile());
+        reqVO.setEmail(createReqDTO.getEmail());
+        reqVO.setSex(createReqDTO.getSex());
+        reqVO.setRemark(createReqDTO.getRemark());
+        return userService.createUser(reqVO);
+    }
 
     @Override
     @DataPermission(enable = false) // 忽略数据权限，避免因为过滤，导致无法查询用户。类似：https://github.com/YunaiV/ruoyi-vue-pro/issues/1051
