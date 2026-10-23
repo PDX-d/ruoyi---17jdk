@@ -1,0 +1,32 @@
+exam:
+  mock:
+    enabled: false
+    tenant-id: 1
+    students:
+      101:
+        id: 101
+        name: 测试学生甲
+        student-no: TEST2026001
+        class-id: 1
+      102:
+        id: 102
+        name: 测试学生乙
+        student-no: TEST2026002
+        class-id: 2
+    teaching-pairs:
+      - semester-id: 1
+        teacher-id: 1
+        course-id: 1
+        class-id: 1
+      - semester-id: 1
+        teacher-id: 2
+        course-id: 1
+        class-id: 2
+      - semester-id: 1
+        teacher-id: 2
+        course-id: 2
+        class-id: 1
+      - semester-id: 1
+        teacher-id: 2
+        course-id: 2
+        class-id: 2

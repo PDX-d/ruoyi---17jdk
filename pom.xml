@@ -17,6 +17,7 @@
         <module>yudao-module-infra</module>
         <module>yudao-module-timetable</module>
         <module>yudao-module-edu</module>
+        <module>yudao-module-exam</module>
 <!--        <module>yudao-module-member</module>-->
         <module>yudao-module-bpm</module>
 <!--        <module>yudao-module-report</module>-->
